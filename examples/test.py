@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-import client
+import aioirc
 
-c = client.Client('testuser')
+c = aioirc.Client('testuser')
 
 def welcome():
     c.send_raw_line('JOIN {0}', '#test')
