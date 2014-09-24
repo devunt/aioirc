@@ -13,9 +13,9 @@ def readme():
 
 
 if sys.version_info >= (3,4):
-        install_requires = []
-    else:
-        install_requires = ['asyncio']
+    install_requires = []
+else:
+    install_requires = ['asyncio']
 
 
 setup(
