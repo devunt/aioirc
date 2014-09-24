@@ -1,4 +1,8 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 from __future__ import with_statement
+import sys
 
 
 try:
@@ -20,7 +24,7 @@ else:
 
 setup(
     name='aioirc',
-    packages = ['aioirc']
+    packages = ['aioirc'],
     version='0.1',
     description='AsyncIO IRC Library for >= Python 3.3',
     long_description=readme(),
@@ -28,9 +32,9 @@ setup(
     download_url='',
     author='JuneHyeon Bae',
     author_email='devunt' '@' 'gmail.com',
-    license='License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)',
+    license='GNU Lesser General Public License v3 or later (LGPLv3+)',
     py_modules=['aioirc'],
-    keywords = ['irc', 'asyncio']
+    keywords = ['irc', 'asyncio'],
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
