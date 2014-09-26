@@ -11,7 +11,7 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-
+   aioirc/client
 
 Indices and tables
 ==================

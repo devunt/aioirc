@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+""":mod:`aioirc.client` --- Client object
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Provides main IRC client class
+"""
+
 import asyncio
 
 from .connection import Connection
@@ -12,6 +18,19 @@ I_MODE_INVISIBLE = 8
 
 
 class Client(object):
+    """The main IRC client class.
+
+    :param nick: Nickname
+    :type nick: :class:`str`
+    :param user: Username
+    :type user: :class:`str`
+    :param real_name: Real Name
+    :type real_name: :class:`str`
+    :param mode: Initial modes
+    :type mode: :class:`int`
+
+    """
+
     event = EventHandler()
     ev = event # alias
 
