@@ -3,8 +3,8 @@
 
 import asyncio
 
-import connection
-import handler
+from .connection import Connection
+from .handler import EventHandler
 
 
 I_MODE_WALLOPS = 4
@@ -12,7 +12,7 @@ I_MODE_INVISIBLE = 8
 
 
 class Client(object):
-    event = handler.EventHandler()
+    event = EventHandler()
     ev = event # alias
 
     def __init__(self, nick, user=False, real_name=False, mode=0):
@@ -22,7 +22,7 @@ class Client(object):
         self._mode = mode
 
     def connect(self, host, port=6667, encoding='utf-8', use_ssl=False, password=None):
-        self._conn = connection.Connection()
+        self._conn = Connection()
 
         def pingpong(message):
             self.send_raw_line('PONG {0}', message)

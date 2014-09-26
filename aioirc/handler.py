@@ -3,7 +3,7 @@
 
 import re
 
-import event
+from .event import EventHook
 
 
 RE_IRCLINE = re.compile("^(:(?P<prefix>[^ ]+) +)?(?P<command>[^ ]+)(?P<params>( +[^:][^ ]*)*)(?: +:(?P<message>.*))?$")
@@ -49,15 +49,15 @@ class Handler(object):
 
 class EventHandler(Handler):
     def __init__(self):
-        self.connect = event.EventHook()
-        self.welcome = event.EventHook()
-        self.invite = event.EventHook()
-        self.join = event.EventHook()
-        self.kick = event.EventHook()
-        self.part = event.EventHook()
-        self.quit = event.EventHook()
-        self.privmsg = event.EventHook()
-        self.ping = event.EventHook()
+        self.connect = EventHook()
+        self.welcome = EventHook()
+        self.invite = EventHook()
+        self.join = EventHook()
+        self.kick = EventHook()
+        self.part = EventHook()
+        self.quit = EventHook()
+        self.privmsg = EventHook()
+        self.ping = EventHook()
 
     def on_connect(self):
         self.connect.fire()
