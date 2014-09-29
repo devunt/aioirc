@@ -12,8 +12,9 @@ import asyncio
 from .connection import Connection
 from .handler import EventHandler
 
-
+#: WALLOPS mode
 I_MODE_WALLOPS = 4
+#: INVISIBLE mode
 I_MODE_INVISIBLE = 8
 
 
@@ -21,29 +22,41 @@ class Client(object):
     """The main IRC client class.
 
     :param nick: Nickname
-    :type nick: :class:`str`
+    :type nick: ``str``
     :param user: Username
-    :type user: :class:`str`
+    :type user: ``str``
     :param real_name: Real Name
-    :type real_name: :class:`str`
-    :param mode: Initial modes
-    :type mode: :class:`int`
+    :type real_name: ``str``
+    :param mode: Initial modes. I_MODE_INVISIBLE | I_MODE_WALLOPS
+    :type mode: ``int``
 
     """
 
-    event = EventHandler()
-    ev = event # alias
-
-    def __init__(self, nick, user=False, real_name=False, mode=0):
+    def __init__(self, nick: str, user: str = False, real_name: str = False, mode: int = 0):
         self.nick = nick
         self.user = user or nick
         self.real_name = real_name or nick
         self._mode = mode
+        #: Event handler for client
+        self.event = EventHandler()
+        #: Alias of :attr:`event`
+        self.ev = self.event # alias
 
-    def connect(self, host, port=6667, encoding='utf-8', use_ssl=False, password=None):
+
+    def connect(self, host: str, port: int = 6667, encoding: str = 'utf-8', use_ssl: bool = False, password: str = None):
+        """Connect irc client to irc server
+
+        :param host: Hostname
+        :param port: Port
+        :param encoding: Encoding
+        :param use_ssl: Use ssl
+        :param password: Server password
+
+        """
+
         self._conn = Connection()
 
-        def pingpong(message):
+        def pingpong(message: str):
             self.send_raw_line('PONG {0}', message)
         self.ev.ping += pingpong
 
@@ -56,8 +69,18 @@ class Client(object):
         self.connection_task = self._conn.connect(host, port, encoding, use_ssl, password)
 
     def loop(self):
+        """Start irc client"""
+
         loop = asyncio.get_event_loop()
         loop.run_until_complete(self.connection_task)
 
-    def send_raw_line(self, fmt, *args, **kwargs):
+    def send_raw_line(self, fmt: str, *args: object, **kwargs: object):
+        """Send raw line to irc server
+
+        :param fmt: Format string of line
+        :param *args: Format arguments
+        :param **kwargs: Format keyword arguments
+
+        """
+
         self._conn.send_raw_line(fmt, *args, **kwargs)
